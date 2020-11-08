@@ -1,0 +1,202 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+      <link rel="icon" href="{% static 'img/icon8.png' %}" type="image/png" sizes="32x32">
+      
+      <title> GitHub Analyser | Top Repos </title>
+
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+      <link rel="stylesheet" href="{% static 'css/mainstyle.css' %}">
+      <link rel="stylesheet" href="{% static 'css/landingpage.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.css" integrity="sha512-9Tu/Gu0+bXW+oGrTGJOeNz2RG4MaF52FznXCciXFrXehFTLF6phJnJFNVOU2mmj9FWIXk9ap0H1ocygu1ZTRqg==" crossorigin="anonymous" />
+      <style>
+          
+          .collapsible {
+            background-color: #2f3136;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            }
+
+            .active, .collapsible:hover {
+            background-color: #555;
+            }
+
+            .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            /* background-color: #f1f1f1; */
+            }
+            .modal {
+		  display: none; 
+		  position: fixed; 
+		  z-index: 1;
+		  left: 0;
+		  top: 0;
+		  width: 100%; 
+		  height: 100%; 
+		  overflow: hidden; 
+		  background-color: rgb(0,0,0); 
+		  background-color: rgba(0,0,0,0.4); 
+		  padding-top: 60px;
+		}
+		
+		.modal-content 
+		{
+		  background-color: #32353a;
+		  margin: 5% auto 15% auto;
+		  border: 1px solid #32353a;
+		  width: 52%; 
+		}
+		
+        
+         footer {
+         bottom: -50px;
+         }
+
+
+      </style>
+   </head>
+   <body>
+
+      <header class="site-header container animated fadeInDownBig">
+         <div class="header-wrapper animated fadeInDownBig">
+            <div class="row">
+               <div class="col-md-8">
+                  <nav id="nav" class="main-navigation hidden-xs hidden-sm">
+                     <ul class="main-menu">
+                       
+                        <a href="{% url 'home_page' %}">
+                        <h1> 
+                            
+                            <i class="icon-social-github"></i> <span style=" font-size: 35px;">GITHUB</span> <span style="color: darkgreen;font-size: 35px;">ANALYSER</span>
+        
+                        </h1>
+                        </a>
+                         
+
+                     </ul>
+                  </nav>          
+            </div>
+         </div>
+      </header>
+
+    <div class="our-story">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="inner-story animated fadeInRight text-center">
+                    <h1 class="animated fadeInDownBig"> <i class="icon-social-github"></i>&nbsp;{{ organization_name }} </h1>
+                    <br>
+                        <div>
+                            <table style="margin-left: auto; margin-right: auto">
+                                <tr >
+                                    <td style="padding-bottom: 10px; padding-right: 40px;">
+                                        <h6  class="animated fadeInUpBig">TOTAL REPOSITORIES : {{ total_repo }}</h6>
+                                    </td>
+                                   <td style="padding-bottom: 10px; padding-right: 40px;">
+                                        <h6  class="animated fadeInUpBig">N : {{ n }}</h6>
+                                    </td>
+                                    <td style="padding-bottom: 10px; padding-right: 40px;">
+                                        <h6  class="animated fadeInUpBig">M : {{ m }}</h6>
+                                    </td>
+                                    <td style="padding-bottom: 10px;">
+                                        <p  class="animated fadeInUpBig">{{value}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ 
+    <div id="menu-container">
+        <div id="menu-1" class="homepage home-section container">
+           <div class="home-intro ">
+            <h2>TOP GITHUB REPO</h2>
+            
+            {% for repo_name,repo_link,forks,contributors in repo_list %}
+
+            <button type="button" class="collapsible"> <a href={{repo_link}}> {{ repo_name }} </a> -> {{ forks }}</button>
+            <div class="content">
+            
+               <table class="table table-hover">
+                  <thead>
+  
+                      <tr>
+                          <th>
+                              <h5 style="color: #fff;text-align:center;">Name</h5>
+                          </th>
+                          <th>
+                              <h5 style="color: #fff;text-align:center;">Commits</h5>
+                          </th>
+                      </tr>
+  
+                  </thead>
+                  
+                  {% for name,profile_link,commits in contributors %}
+                  <tr>
+  
+                      <td style="color: #fff; text-align:center;" > <a href={{profile_link}}> {{ name }} </a></td>
+                      <td style="color: #fff; text-align:center;"> {{commits}}</td>
+
+                  </tr>
+              </a>
+                  {% endfor %}
+  
+  
+              </table>
+
+            </div>
+            
+            {% endfor %}
+            
+           </div>
+        </div>  
+    </div>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+        </script>
+
+
+
+ 
+ <span class="border-top"></span>
+ <span class="border-left"></span>
+ <span class="border-right"></span>
+ <span class="border-bottom"></span>
+ 
+ <span class="shape-1"></span>
+ <span class="shape-2"></span>
+
+ <script src="{% static 'js/jquery.min.js' %}"></script>
+ <script src="{% static 'js/mainjs.js' %}"></script>
+</body>
+</html>
