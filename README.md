@@ -1,6 +1,6 @@
 # GitHub-Analyser
 
-#### Link: https://github-top-repos.herokuapp.com
+#### Link: https://github-repo-analyser.herokuapp.com
 
 
 
