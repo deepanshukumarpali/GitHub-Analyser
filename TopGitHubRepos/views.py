@@ -30,21 +30,15 @@ def repo_page_view(request):
     organization = GithubOrg( organization_name )
 
 
-    # try:
+    try:
 
-    #     # If given organization is Valid 
-    #     top_repo_list = organization.GetTopRepoAndContributors( n, m)
-    # except:
+        # If given organization is Valid 
+        top_repo_list = organization.GetTopRepoAndContributors( n, m)
+    except:
 
-    #     # If given  organization is not Valid
-    #     message = "Error! Invalid Organization or Request Limit Reached"
-    #     return error_page_view(request,message)
-
-    top_repo_list = [
-        ('PBhustle','https://github.com/flenoir/purbeurre',20, [ ('sparsh','www.google.com',12),('sparsh','www.google.com',12) ] ),
-        ('PBhustle','https://github.com/flenoir/purbeurre',20, [ ('sparsh','www.google.com',12),('sparsh','www.google.com',12) ] ),
-        ('PBhustle','https://github.com/flenoir/purbeurre',20, [ ('sparsh','www.google.com',12),('sparsh','www.google.com',12) ] )
-    ]
+        # If given  organization is not Valid
+        message = "Error! Invalid Organization or Request Limit Reached"
+        return error_page_view(request,message)
 
 
     return render( request,'repo_page.html',
