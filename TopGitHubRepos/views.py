@@ -37,7 +37,7 @@ def repo_page_view(request):
     except:
 
         # If given  organization is not Valid
-        message = "Error!"
+        message = "Error! Invalid Organization or Request Limit Reached"
         return error_page_view(request,message)
 
 
@@ -53,7 +53,7 @@ def repo_page_view(request):
 
 
 
-# For Invalid Organisations
+# For Invalid Organisations or Request Limit Reached
 
 def error_page_view(request,message):
 

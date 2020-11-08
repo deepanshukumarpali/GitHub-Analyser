@@ -15,7 +15,7 @@
       <link rel="stylesheet" href="{% static 'css/landingpage.css' %}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.css" integrity="sha512-9Tu/Gu0+bXW+oGrTGJOeNz2RG4MaF52FznXCciXFrXehFTLF6phJnJFNVOU2mmj9FWIXk9ap0H1ocygu1ZTRqg==" crossorigin="anonymous" />
       <style>
-          
+
           .collapsible {
             background-color: #2f3136;
             color: white;
@@ -95,7 +95,7 @@
     <div class="our-story">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <div class="inner-story animated fadeInRight text-center">
+                <div class="inner-story animated fadeInDownBig text-center">
                     <h1 class="animated fadeInDownBig"> <i class="icon-social-github"></i>&nbsp;{{ organization_name }} </h1>
                     <br>
                         <div>
@@ -104,6 +104,8 @@
                                     <td style="padding-bottom: 10px; padding-right: 40px;">
                                         <h6  class="animated fadeInUpBig">TOTAL REPOSITORIES : {{ total_repo }}</h6>
                                     </td>
+
+
                                    <td style="padding-bottom: 10px; padding-right: 40px;">
                                         <h6  class="animated fadeInUpBig">N : {{ n }}</h6>
                                     </td>
@@ -124,50 +126,59 @@
 
  
     <div id="menu-container">
-        <div id="menu-1" class="homepage home-section container">
+        <div class="homepage home-section container ">
            <div class="home-intro ">
+            <div class="animated fadeInUpBig">
             <h2>TOP GITHUB REPO</h2>
-            
+            </div>
             {% for repo_name,repo_link,forks,contributors in repo_list %}
-
-            <button type="button" class="collapsible"> <a href={{repo_link}}> {{ repo_name }} </a> -> {{ forks }}</button>
-            <div class="content">
+            <div class="animated fadeInDownBig">
+            <button type="button" class="collapsible" style="margin-left: 10px;"> 
+                {{forloop.counter}}.&nbsp; {{ repo_name }} ( <a href={{repo_link}}> GitHub Link </a> )
+               <div style="float: right;margin-right: 100px;">Forks: {{ forks }}</div> 
+            </button>
+        
+            <div >
             
-               <table class="table table-hover">
+               <table class="table table-hover" >
                   <thead>
   
                       <tr>
+                        <th>
+                            <h5 style="color: #fff;text-align:center;" class="animated fadeInLeft">Sr. No.</h5>
+                        </th>
                           <th>
-                              <h5 style="color: #fff;text-align:center;">Name</h5>
+                              <h5 style="color: #fff;text-align:center;"class="animated fadeInLeft">Contributers</h5>
                           </th>
                           <th>
-                              <h5 style="color: #fff;text-align:center;">Commits</h5>
+                              <h5 style="color: #fff;text-align:center;"class="animated fadeInLeft">No. of Commits</h5>
                           </th>
                       </tr>
   
                   </thead>
                   
-                  {% for name,profile_link,commits in contributors %}
+                  {% for name, profile_link, commits in contributors %}
+            
                   <tr>
-  
-                      <td style="color: #fff; text-align:center;" > <a href={{profile_link}}> {{ name }} </a></td>
-                      <td style="color: #fff; text-align:center;"> {{commits}}</td>
-
+                    
+                      <td style="color: #fff; text-align:center; "class="animated fadeInRight"> {{forloop.counter}}</td>
+                      <td style="color: #fff; text-align:center;" class="animated fadeInRight"> {{ name }} ( <a href={{profile_link}}> Profile Link </a> ) </td>
+                      <td style="color: #fff; text-align:center;"class="animated fadeInRight"> {{commits}}</td>
                   </tr>
-              </a>
+                    
+                 
                   {% endfor %}
   
   
               </table>
 
             </div>
-            
             {% endfor %}
             
            </div>
         </div>  
     </div>
-
+</div>
     <script>
         var coll = document.getElementsByClassName("collapsible");
         var i;
@@ -186,6 +197,29 @@
         </script>
 
 
+<br><br>      
+<footer class="site-footer container text-center" style="bottom: 0px;">
+    <div class="row">
+       <div class="col-md-12">
+          <div class="main-footer" style="border-bottom: 0px solid #46494f;padding: 0px 0 0px 0;">
+            
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-md-12 copyright">
+          <p>Crafted By -  <a href="https://github.com/"target="_blank"><i class="icon-social-github"></i></a> :  &nbsp; <a >Deepanshu Kumar Pali</a> &nbsp; 
+          <a href="https://mail.google.com/mail/?view=cm&source=mailto&to=deepanshukumarpali7@gmail.com" target="_blank"><i class="icon-social-google"></i></a>
+          &nbsp;
+          <a href="https://www.linkedin.com/in/deepanshu-pali/" target="_blank"><i class="icon-social-linkedin"></i></a> 
+             &nbsp;
+             <a href="https://github.com/deepanshukumarpali"target="_blank"><i class="icon-social-github"></i></a>
+       </p>
+          <!-- <p> Wanna check <a href="https://github.com/SSD-2020/PBhustle">Under the Hood</a>?</p> -->
+       </div>
+    </div>
+ </footer>
+ 
 
  
  <span class="border-top"></span>
@@ -196,7 +230,7 @@
  <span class="shape-1"></span>
  <span class="shape-2"></span>
 
- <script src="{% static 'js/jquery.min.js' %}"></script>
- <script src="{% static 'js/mainjs.js' %}"></script>
+
+
 </body>
 </html>
