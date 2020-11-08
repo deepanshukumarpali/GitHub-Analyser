@@ -17,7 +17,7 @@
       <style>
 
           .collapsible {
-            background-color: #2f3136;
+            background-color: #555;
             color: white;
             cursor: pointer;
             padding: 18px;
@@ -122,15 +122,13 @@
             </div>
         </div>
     </div>
-
+    <br><br>
 
  
     <div id="menu-container">
         <div class="homepage home-section container ">
            <div class="home-intro ">
-            <div class="animated fadeInUpBig">
-            <h2>TOP GITHUB REPO</h2>
-            </div>
+
             {% for repo_name,repo_link,forks,contributors in repo_list %}
             <div class="animated fadeInDownBig">
             <button type="button" class="collapsible" style="margin-left: 10px;"> 
