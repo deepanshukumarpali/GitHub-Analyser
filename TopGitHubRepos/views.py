@@ -28,17 +28,12 @@ def repo_page_view(request):
 
     # Instance of class GithubOrg with given organisation
     organization = GithubOrg( organization_name )
+    top_repo_list = organization.GetTopRepoAndContributors( n, m)
 
+    # If given organization is inValid 
 
-    try:
-
-        # If given organization is Valid 
-        top_repo_list = organization.GetTopRepoAndContributors( n, m)
-    except:
-
-        # If given  organization is not Valid
-        message = "Error! Invalid Organization or Request Limit Reached"
-        return error_page_view(request,message)
+    if(len(top_repo_list)==0): 
+        return error_page_view(request,"Organization Not Found")
 
 
     return render( request,'repo_page.html',

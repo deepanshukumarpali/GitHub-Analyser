@@ -64,7 +64,15 @@ class GithubOrg:
         content=requests.get(url).json()
 
 
-        self.total_repo = content['total_count']
+
+        try: 
+            self.total_repo = content['total_count']
+        except: 
+
+            # When organization in inValid
+            return []
+
+        
         content = content['items']
         top_repos = list()
 
