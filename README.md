@@ -7,18 +7,20 @@
 - How to Use Locally:
 
     * Download this repository.
-    * Open project directory.
-    * Run following command
+    * Open terminal
+    * Run the following command
     ```bash
+        $ cd [project_directory]
         $ python manage.py runserver
     ```
 
 - What it does:
 
     * Takes 3 input values
-        * Organisation name
-        * Number of repositories (n)
-        * Number of contributors (m)
+        1) Organisation name
+        2) Number of repositories (n)
+        3) Number of contributors (m)
+        
     * Display top {n} repositories of the given organisation on GitHub (Based on number of forks)
     * For each {n} repositories display {m} top committees (Based on number of commits)
 
