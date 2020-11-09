@@ -28,18 +28,19 @@ def repo_page_view(request):
 
     # Instance of class GithubOrg with given organisation
     organization = GithubOrg( organization_name )
-    top_repo_list = organization.GetTopRepoAndContributors( n, m)
+    repos = organization.GetTopRepoAndContributors( n, m)
 
     # If given organization is inValid 
 
-    if(len(top_repo_list)==0): 
-        return error_page_view(request,"Organization Not Found")
+    if(repos['status'] != 'ok'): 
+
+        return error_page_view(request,repos['status'])
 
 
     return render( request,'repo_page.html',
             {
                 'organization_name' : organization_name,
-                'repo_list' : top_repo_list,
+                'repo_list' : repos['top_repo'],
                 'total_repo' : organization.total_repo,
                 'n': n,
                 'm' : m,

@@ -63,28 +63,46 @@ class GithubOrg:
         url = f"https://api.github.com/search/repositories?q=user:{self.organization}+sort:forks-desc&per_page={n}"
         content=requests.get(url).json()
 
-
+        return_obj = {
+            'status': 'ok',
+            'top_repo': list() 
+        }
 
         try: 
             self.total_repo = content['total_count']
+
         except: 
 
             # When organization in inValid
-            return []
 
+            return_obj['status']="Organization Not Found"
+            return return_obj
         
         content = content['items']
-        top_repos = list()
 
         for repo in content:
 
-            top_repos.append(
+            name=repo['full_name']
+            link=repo['html_url']
+            forks=repo['forks']
+
+            try:  
+                contributors=self.GetTopContributors( repo['full_name'], m)
+
+            except:
+                
+                # API request Error " API Rate Limit Exceeded "
+                return_obj['status']="Request Limit Exceeded"
+                break
+
+            return_obj['top_repo'].append(
                 (
-                    repo['full_name'],
-                    repo['html_url'],
-                    repo['forks'],
-                    self.GetTopContributors( repo['full_name'], m),
+                    name,
+                    link,
+                    forks,
+                    contributors,
                 )
             )
 
-        return top_repos
+        return return_obj
+
