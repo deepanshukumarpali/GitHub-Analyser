@@ -1,8 +1,5 @@
 # GitHub-Analyser
 
-#### Link: https://github-repo-analyser.herokuapp.com
-
-
 
 - How to Use Locally:
 
