@@ -1,1 +1,1 @@
-web: gunicorn almabase.wsgi
+web: gunicorn almabase.wsgi --log-file -
